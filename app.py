@@ -635,18 +635,24 @@ def main():
 
     if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
         fire_confetti()
-        st.markdown("""
-        <div style="
-            font-family: 'Playfair Display', serif;
-            color: #d23669;
-            font-size: 1.3rem;
-            text-align: center;
-            margin: 30px 0;
-        ">
-            Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
+        # Bungkus tombol dengan div biar bisa center
+    st.markdown(
+        """
+        <div style="display: flex; justify-content: center;">
+            <button style="
+                background-color: #f5f5f5;
+                border: 2px solid #d23669;
+                color: #d23669;
+                font-size: 1.1rem;
+                padding: 10px 20px;
+                border-radius: 10px;
+                cursor: pointer;
+            ">👑 Click for Royal Celebration!</button>
         </div>
-        """, unsafe_allow_html=True)
-    
+        """,
+        unsafe_allow_html=True
+    )
+
     st.markdown(f"""
     <div class="footer">
         Made with 💖 for Princess {data['name']}'s {data['graduation_year']} Graduation
