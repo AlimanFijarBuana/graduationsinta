@@ -638,15 +638,17 @@ def main():
         if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
             fire_confetti()
             st.markdown("""
-            <div style="
-                font-family: 'Playfair Display', serif;
-                color: #d23669;
-                font-size: 1.3rem;
-                text-align: center;
-                margin: 30px 0;
-            ">
-                Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
-            </div>
+                <div style="text-align: center;">
+                    <div style="
+                        font-family: 'Playfair Display', serif;
+                        color: #d23669;
+                        font-size: 1.3rem;
+                        margin: 30px 0;
+                    ">
+                        Semoga setiap langkahmu selalu dipenuhi cahaya, 
+                        karena kamu pantas bersinar lebih dari siapapun! ✨
+                    </div>
+                </div>
             """, unsafe_allow_html=True)
 
     
