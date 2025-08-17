@@ -633,31 +633,19 @@ def main():
 
     components.html(html_code, height=500)
 
-    if "celebrate" not in st.session_state:
-    st.session_state.celebrate = False
-
-    # tombol HTML
-    st.markdown("""
-    <div style="text-align:center; margin: 40px 0;">
-        <button onclick="window.location.reload();" 
-            style="
-                width: 300px;
-                padding: 16px 0;
-                font-size: 1.2rem;
-                border-radius: 50px;
-                background: linear-gradient(135deg, #d23669, #ff69b4);
-                color: white;
-                border: none;
-                cursor: pointer;
-            ">
-            👑 Click for Royal Celebration!
-        </button>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # efek celebration (bisa pakai st.session_state.celebrate)
-    if st.session_state.celebrate:
-        st.balloons()
+    if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
+        fire_confetti()
+        st.markdown("""
+        <div style="
+            font-family: 'Playfair Display', serif;
+            color: #d23669;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 30px 0;
+        ">
+            Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
+        </div>
+        """, unsafe_allow_html=True)
     
     st.markdown(f"""
     <div class="footer">
