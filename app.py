@@ -431,10 +431,9 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-   # GALERI FOTO
-    st.markdown('<div class="gallery-title" style="text-align:center;">Memory Lane 🌸</div>', unsafe_allow_html=True)
+    # GALERI FOTO
+    st.markdown('<div class="gallery-title">Memory Lane 🌸</div>', unsafe_allow_html=True)
 
-    # Menggunakan st.columns dengan lebar yang sama untuk semua gambar
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -633,8 +632,9 @@ def main():
 
     components.html(html_code, height=500)
 
-    col1, col2, col3 = st.columns([1,2,1])  # kolom kiri, tengah, kanan
-    with col2:  # biar tombol ada di tengah
+    # Pastikan tombol ini di tengah dengan st.columns
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
         if st.button("👑 Click for Royal Celebration!"):
             st.balloons()
             st.markdown("""
