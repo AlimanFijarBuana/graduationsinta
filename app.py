@@ -431,22 +431,22 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    # GALERI FOTO
+   # GALERI FOTO
     st.markdown('<div class="gallery-title" style="text-align:center;">Memory Lane 🌸</div>', unsafe_allow_html=True)
 
     # Menggunakan st.columns dengan lebar yang sama untuk semua gambar
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.image(gallery[0]['path'], use_column_width=False)
+        st.image(gallery[0]['path'], use_container_width=True)
         st.markdown(f"<div class='image-caption'>{gallery[0]['caption']}</div>", unsafe_allow_html=True)
 
     with col2:
-        st.image(gallery[1]['path'], use_column_width=False)
+        st.image(gallery[1]['path'], use_container_width=True)
         st.markdown(f"<div class='image-caption'>{gallery[1]['caption']}</div>", unsafe_allow_html=True)
 
     with col3:
-        st.image(gallery[2]['path'], use_column_width=False)
+        st.image(gallery[2]['path'], use_container_width=True)
         st.markdown(f"<div class='image-caption'>{gallery[2]['caption']}</div>", unsafe_allow_html=True)
 
     # PEMUTAR MUSIK
