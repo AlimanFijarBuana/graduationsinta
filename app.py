@@ -8,7 +8,7 @@ import os
 st.set_page_config(
     page_title="✨ Graduation Sinta Istamarina ✨",
     page_icon="👑",
-    layout="wide",
+    layout="centered",  # Ubah dari "wide" ke "centered"
     initial_sidebar_state="collapsed"
 )
 
@@ -98,6 +98,12 @@ st.markdown(f"""
         100% {{ background-position: 0% 50%; }}
     }}
 
+    /* MAIN CONTAINER CENTERING */
+    .main .block-container {{
+        max-width: 1000px;
+        padding: 2rem 1rem;
+    }}
+
     /* MAIN CARD */
     .princess-card {{
         background: rgba(255, 255, 255, 0.85);
@@ -106,7 +112,6 @@ st.markdown(f"""
         border-radius: 30px;
         padding: 60px 40px;
         margin: 40px auto;
-        max-width: 95%;
         width: 100%;
         box-shadow: 0 20px 60px rgba(210, 54, 105, 0.2);
         text-align: center;
@@ -233,7 +238,7 @@ st.markdown(f"""
         margin-top: 15px;
         padding: 10px 20px;
         text-align: center;
-        background: rgba(255, 255, 255, 0.85); /* Latar belakang putih semi-transparan */
+        background: rgba(255, 255, 255, 0.85);
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         width: fit-content;
@@ -412,247 +417,252 @@ def main():
     """Fungsi utama untuk menampilkan konten halaman web."""
     st.balloons()
 
-    # KOTAK UCAPAN
-    st.markdown(f"""
-    <div class="princess-card">
-        <h2>Congratulations Princess</h2>
-        <h1>{data['name']}</h1>
-        <div class="degree-badge">{data['degree']}</div>
-        <h2>For Your Magnificent Achievement</h2>
-        <p>👑 {data['faculty']} | {data['university']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # KOTAK KUTIPAN
-    st.markdown(f"""
-    <div class="quote-box">
-        <div class="quote-text">{data['quote']}</div>
-        <div class="quote-author">~ {data['name']} ~</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-   # GALERI FOTO
-    st.markdown('<div class="gallery-title" style="text-align:center;">Memory Lane 🌸</div>', unsafe_allow_html=True)
-
-    # Menggunakan st.columns dengan lebar yang sama untuk semua gambar
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.image(gallery[0]['path'], use_container_width=True)
-        st.markdown(f"<div class='image-caption'>{gallery[0]['caption']}</div>", unsafe_allow_html=True)
-
-    with col2:
-        st.image(gallery[1]['path'], use_container_width=True)
-        st.markdown(f"<div class='image-caption'>{gallery[1]['caption']}</div>", unsafe_allow_html=True)
-
-    with col3:
-        st.image(gallery[2]['path'], use_container_width=True)
-        st.markdown(f"<div class='image-caption'>{gallery[2]['caption']}</div>", unsafe_allow_html=True)
-
-    # PEMUTAR MUSIK
-    st.markdown("""
-    <div class="music-player-container">
-        <div class="music-title">Celebration Anthem</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    with open("img/AboutYou.mp3", "rb") as f:
-        audio_bytes = f.read()
-    audio_base64 = base64.b64encode(audio_bytes).decode()
-
-    try:
-        with open("img/piringan.png", "rb") as f:
-            img_bytes = f.read()
-            img_base64 = base64.b64encode(img_bytes).decode()
-    except FileNotFoundError:
-        img_base64 = ""
-        st.error("File piringan.png tidak ditemukan.")
-
-    lyrics_timed = [
-        (0, "...intro..."),
-        (44, "I know a place"),
-        (54, "It's somewhere I go when I need to remember your face"),
-        (64, "We get married in our heads"),
-        (74, "Something to do whilst we try to recall how we met"),
-        (84, "Do you think I have forgotten?"),
-        (89, "Do you think I have forgotten?"),
-        (94, "Do you think I have forgotten about you?"),
-        (104, "You and I"),
-        (109, "Were alive"),
-        (114, "With nothing to do I could lay and just look in your eyes"),
-        (124, "Wait and pretend"),
-        (134, "Hold on and hope that we'll find our way back in the end"),
-        (144, "Do you think I have forgotten?"),
-        (149, "Do you think I have forgotten?"),
-        (154, "Do you think I have forgotten about you?"),
-        (164, "Do you think I have forgotten?"),
-        (169, "Do you think I have forgotten?"),
-        (174, "Do you think I have forgotten about you?"),
-        (184, "There was something about you that now I can't remember"),
-        (189, "It's the same damn thing that made my heart surrender"),
-        (194, "And I'll miss you on a train"),
-        (196, "I'll miss you in the morning"),
-        (199, "I never know what to think about, so think about you"),
-        (203, "(I think about you)"),
-        (209, "About you"),
-        (214, "Do you think I have forgotten about you?"),
-        (224, "About you"),
-        (229, "About you"),
-        (234, "Do you think I have forgotten about you?"),
-        (250, "...end..."),
-    ]
-    lyrics_js = json.dumps(lyrics_timed)
-
-    html_code = f"""
-    <div style="
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(5px);
-        border-radius: 20px;
-        padding: 30px;
-        margin: 0 auto;
-        max-width: 500px;
-        text-align: center;
-    ">
-        <div id="lyrics" style="
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            color: #ffd700;
-            margin: 30px 0;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-style: italic;
-            line-height: 1.6;
-        "></div>
-
-        <div style="
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-            position: relative;
-        ">
-            <div style="
-                width: 200px;
-                height: 200px;
-                position: relative;
-            ">
-                <img id="cassette" src="data:image/png;base64,{img_base64}" style="
-                    width: 100%;
-                    height: 100%;
-                    object-fit: contain;
-                    filter: drop-shadow(0 0 15px rgba(255,215,0,0.3));
-                ">
-                <div style="
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 50%;
-                    box-shadow: inset 0 0 30px rgba(255,215,0,0.3);
-                "></div>
-            </div>
-        </div>
-        
-        <button id="playBtn" style="
-            background: linear-gradient(135deg, #d23669 0%, #ff69b4 100%);
-            color: white;
-            border: none;
-            padding: 14px 35px;
-            font-size: 1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(210, 54, 105, 0.3);
-            position: relative;
-            overflow: hidden;
-        ">
-            ▶️ Play Royal Anthem
-        </button>
-    </div>
-
-    <audio id="player" src="data:audio/mp3;base64,{audio_base64}"></audio>
-
-    <script>
-    const lyrics = {lyrics_js};
-    const player = document.getElementById('player');
-    const lyricsDiv = document.getElementById('lyrics');
-    const playBtn = document.getElementById('playBtn');
-    const cassette = document.getElementById('cassette');
-
-    let animationId = null;
-    let startTime = null;
-    let isPlaying = false;
-
-    function animate(now) {{
-        if (!startTime) startTime = now;
-        const elapsed = (now - startTime) / 1000;
-        cassette.style.transform = "rotate(" + (elapsed * 120) + "deg)";
-        
-        let currentLyric = "";
-        for (let i = 0; i < lyrics.length; i++) {{
-            if (elapsed >= lyrics[i][0]) {{
-                currentLyric = lyrics[i][1];
-            }}
-        }}
-        lyricsDiv.innerHTML = currentLyric;
-
-        if (!player.paused) {{
-            animationId = requestAnimationFrame(animate);
-        }}
-    }}
-
-    playBtn.onclick = () => {{
-        if (isPlaying) {{
-            player.pause();
-            cancelAnimationFrame(animationId);
-            playBtn.innerHTML = "▶️ Play Royal Anthem";
-            isPlaying = false;
-        }} else {{
-            player.play();
-            startTime = null;
-            animationId = requestAnimationFrame(animate);
-            playBtn.innerHTML = "⏸️ Pause";
-            isPlaying = true;
-        }}
-    }};
-
-    player.onended = () => {{
-        cancelAnimationFrame(animationId);
-        cassette.style.transform = "rotate(0deg)";
-        lyricsDiv.innerHTML = "";
-        playBtn.innerHTML = "▶️ Play Royal Anthem";
-        isPlaying = false;
-    }};
-    </script>
-    """
-
-    components.html(html_code, height=500)
-
-    if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
-        fire_confetti()
-        st.markdown("""
-        <div style="
-            font-family: 'Playfair Display', serif;
-            color: #d23669;
-            font-size: 1.3rem;
-            text-align: center;
-            margin: 30px 0;
-        ">
-            Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
+    # Membuat container utama untuk semua konten
+    with st.container():
+        # KOTAK UCAPAN
+        st.markdown(f"""
+        <div class="princess-card">
+            <h2>Congratulations Princess</h2>
+            <h1>{data['name']}</h1>
+            <div class="degree-badge">{data['degree']}</div>
+            <h2>For Your Magnificent Achievement</h2>
+            <p>👑 {data['faculty']} | {data['university']}</p>
         </div>
         """, unsafe_allow_html=True)
-    
-    st.markdown(f"""
-    <div class="footer">
-        Made with 💖 for Princess {data['name']}'s {data['graduation_year']} Graduation
-        -by Mon
-    </div>
-    """, unsafe_allow_html=True)
+
+        # KOTAK KUTIPAN
+        st.markdown(f"""
+        <div class="quote-box">
+            <div class="quote-text">{data['quote']}</div>
+            <div class="quote-author">~ {data['name']} ~</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+       # GALERI FOTO
+        st.markdown('<div class="gallery-title" style="text-align:center;">Memory Lane 🌸</div>', unsafe_allow_html=True)
+
+        # Menggunakan st.columns dengan lebar yang sama untuk semua gambar
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.image(gallery[0]['path'], use_container_width=True)
+            st.markdown(f"<div class='image-caption'>{gallery[0]['caption']}</div>", unsafe_allow_html=True)
+
+        with col2:
+            st.image(gallery[1]['path'], use_container_width=True)
+            st.markdown(f"<div class='image-caption'>{gallery[1]['caption']}</div>", unsafe_allow_html=True)
+
+        with col3:
+            st.image(gallery[2]['path'], use_container_width=True)
+            st.markdown(f"<div class='image-caption'>{gallery[2]['caption']}</div>", unsafe_allow_html=True)
+
+        # PEMUTAR MUSIK
+        st.markdown("""
+        <div class="music-player-container">
+            <div class="music-title">Celebration Anthem</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        with open("img/AboutYou.mp3", "rb") as f:
+            audio_bytes = f.read()
+        audio_base64 = base64.b64encode(audio_bytes).decode()
+
+        try:
+            with open("img/piringan.png", "rb") as f:
+                img_bytes = f.read()
+                img_base64 = base64.b64encode(img_bytes).decode()
+        except FileNotFoundError:
+            img_base64 = ""
+            st.error("File piringan.png tidak ditemukan.")
+
+        lyrics_timed = [
+            (0, "...intro..."),
+            (44, "I know a place"),
+            (54, "It's somewhere I go when I need to remember your face"),
+            (64, "We get married in our heads"),
+            (74, "Something to do whilst we try to recall how we met"),
+            (84, "Do you think I have forgotten?"),
+            (89, "Do you think I have forgotten?"),
+            (94, "Do you think I have forgotten about you?"),
+            (104, "You and I"),
+            (109, "Were alive"),
+            (114, "With nothing to do I could lay and just look in your eyes"),
+            (124, "Wait and pretend"),
+            (134, "Hold on and hope that we'll find our way back in the end"),
+            (144, "Do you think I have forgotten?"),
+            (149, "Do you think I have forgotten?"),
+            (154, "Do you think I have forgotten about you?"),
+            (164, "Do you think I have forgotten?"),
+            (169, "Do you think I have forgotten?"),
+            (174, "Do you think I have forgotten about you?"),
+            (184, "There was something about you that now I can't remember"),
+            (189, "It's the same damn thing that made my heart surrender"),
+            (194, "And I'll miss you on a train"),
+            (196, "I'll miss you in the morning"),
+            (199, "I never know what to think about, so think about you"),
+            (203, "(I think about you)"),
+            (209, "About you"),
+            (214, "Do you think I have forgotten about you?"),
+            (224, "About you"),
+            (229, "About you"),
+            (234, "Do you think I have forgotten about you?"),
+            (250, "...end..."),
+        ]
+        lyrics_js = json.dumps(lyrics_timed)
+
+        html_code = f"""
+        <div style="
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 0 auto;
+            max-width: 500px;
+            text-align: center;
+        ">
+            <div id="lyrics" style="
+                font-family: 'Playfair Display', serif;
+                font-size: 1.3rem;
+                color: #ffd700;
+                margin: 30px 0;
+                min-height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-style: italic;
+                line-height: 1.6;
+            "></div>
+
+            <div style="
+                display: flex;
+                justify-content: center;
+                margin: 30px 0;
+                position: relative;
+            ">
+                <div style="
+                    width: 200px;
+                    height: 200px;
+                    position: relative;
+                ">
+                    <img id="cassette" src="data:image/png;base64,{img_base64}" style="
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        filter: drop-shadow(0 0 15px rgba(255,215,0,0.3));
+                    ">
+                    <div style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        box-shadow: inset 0 0 30px rgba(255,215,0,0.3);
+                    "></div>
+                </div>
+            </div>
+            
+            <button id="playBtn" style="
+                background: linear-gradient(135deg, #d23669 0%, #ff69b4 100%);
+                color: white;
+                border: none;
+                padding: 14px 35px;
+                font-size: 1rem;
+                border-radius: 50px;
+                cursor: pointer;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 500;
+                letter-spacing: 1px;
+                transition: all 0.3s ease;
+                box-shadow: 0 8px 20px rgba(210, 54, 105, 0.3);
+                position: relative;
+                overflow: hidden;
+            ">
+                ▶️ Play Royal Anthem
+            </button>
+        </div>
+
+        <audio id="player" src="data:audio/mp3;base64,{audio_base64}"></audio>
+
+        <script>
+        const lyrics = {lyrics_js};
+        const player = document.getElementById('player');
+        const lyricsDiv = document.getElementById('lyrics');
+        const playBtn = document.getElementById('playBtn');
+        const cassette = document.getElementById('cassette');
+
+        let animationId = null;
+        let startTime = null;
+        let isPlaying = false;
+
+        function animate(now) {{
+            if (!startTime) startTime = now;
+            const elapsed = (now - startTime) / 1000;
+            cassette.style.transform = "rotate(" + (elapsed * 120) + "deg)";
+            
+            let currentLyric = "";
+            for (let i = 0; i < lyrics.length; i++) {{
+                if (elapsed >= lyrics[i][0]) {{
+                    currentLyric = lyrics[i][1];
+                }}
+            }}
+            lyricsDiv.innerHTML = currentLyric;
+
+            if (!player.paused) {{
+                animationId = requestAnimationFrame(animate);
+            }}
+        }}
+
+        playBtn.onclick = () => {{
+            if (isPlaying) {{
+                player.pause();
+                cancelAnimationFrame(animationId);
+                playBtn.innerHTML = "▶️ Play Royal Anthem";
+                isPlaying = false;
+            }} else {{
+                player.play();
+                startTime = null;
+                animationId = requestAnimationFrame(animate);
+                playBtn.innerHTML = "⏸️ Pause";
+                isPlaying = true;
+            }}
+        }};
+
+        player.onended = () => {{
+            cancelAnimationFrame(animationId);
+            cassette.style.transform = "rotate(0deg)";
+            lyricsDiv.innerHTML = "";
+            playBtn.innerHTML = "▶️ Play Royal Anthem";
+            isPlaying = false;
+        }};
+        </script>
+        """
+
+        components.html(html_code, height=500)
+
+        # Tombol Celebration dengan container khusus
+        col_btn = st.columns([1, 2, 1])  # Membuat 3 kolom dengan kolom tengah lebih lebar
+        with col_btn[1]:  # Hanya menggunakan kolom tengah
+            if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
+                fire_confetti()
+                st.markdown("""
+                <div style="
+                    font-family: 'Playfair Display', serif;
+                    color: #d23669;
+                    font-size: 1.3rem;
+                    text-align: center;
+                    margin: 30px 0;
+                ">
+                    Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
+                </div>
+                """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+        <div class="footer">
+            Made with 💖 for Princess {data['name']}'s {data['graduation_year']} Graduation
+            -by Mon
+        </div>
+        """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
