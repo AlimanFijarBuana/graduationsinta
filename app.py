@@ -634,22 +634,32 @@ def main():
     components.html(html_code, height=500)
 
     col1, col2, col3 = st.columns([1,2,1])  # kolom kiri, tengah, kanan
-    with col2:  # biar tombol ada di tengah
-        if st.button("👑 Click for Royal Celebration!"):
-            st.balloons()
-            st.markdown("""
-            <div style="
-                font-family: 'Playfair Display', serif;
-                color: #d23669;
-                font-size: 1.3rem;
-                text-align: center;
-                margin: 30px 0;
-            ">
-                Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
-            </div>
-            """, unsafe_allow_html=True)
+with col2:  # biar tombol ada di kolom tengah
+    # Tambahkan style untuk memaksa tombol ke tengah
+    st.markdown("""
+        <style>
+        div.stButton > button:first-child {
+            display: block;
+            margin: 0 auto;
+        }
+        </style>
+    """, unsafe_allow_html=True)
 
-    
+    if st.button("👑 Click for Royal Celebration!"):
+        st.balloons()
+        st.markdown("""
+        <div style="
+            font-family: 'Playfair Display', serif;
+            color: #d23669;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 30px auto;
+        ">
+            ✨ Semoga setiap langkahmu selalu dipenuhi cahaya,<br>
+            karena kamu pantas bersinar lebih dari siapapun! ✨
+        </div>
+        """, unsafe_allow_html=True)
+
     st.markdown(f"""
     <div class="footer">
         Made with 💖 for Princess {data['name']}'s {data['graduation_year']} Graduation
