@@ -633,57 +633,7 @@ def main():
 
     components.html(html_code, height=500)
 
-    # ==================== BUTTON ROYAL CELEBRATION ====================
-    # Initialize celebrate state
-    if "celebrate" not in st.session_state:
-        st.session_state.celebrate = False
-
-    # Tombol HTML
-    celebrate_html = f"""
-    <div style="
-        display: flex;
-        justify-content: center;
-        margin: 50px 0;
-    ">
-        <button id="celebrateBtn" style="
-            background: linear-gradient(135deg, #d23669 0%, #ff69b4 100%);
-            color: white;
-            border: none;
-            padding: 16px 45px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 25px rgba(210, 54, 105, 0.3);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        ">
-            👑 Click for Royal Celebration!
-        </button>
-    </div>
-
-    <script>
-    const btn = document.getElementById('celebrateBtn');
-    btn.onclick = () => {{
-        // Update URL query param
-        const url = new URL(window.location);
-        url.searchParams.set('celebrate', 'true');
-        window.history.pushState(null, '', url);
-        window.location.reload();
-    }};
-    </script>
-    """
-
-    components.html(celebrate_html, height=100)
-
-    # Tangani celebration di Python
-    if st.query_params.get("celebrate") == ["true"]:
-        st.session_state.celebrate = True
-
-    if st.session_state.celebrate:
+    if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
         fire_confetti()
         st.markdown("""
         <div style="
@@ -691,14 +641,12 @@ def main():
             color: #d23669;
             font-size: 1.3rem;
             text-align: center;
-            margin: 30px 0;
+            margin: 300px 0;
         ">
             Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
         </div>
         """, unsafe_allow_html=True)
-
-
-        
+    
     st.markdown(f"""
     <div class="footer">
         Made with 💖 for Princess {data['name']}'s {data['graduation_year']} Graduation
