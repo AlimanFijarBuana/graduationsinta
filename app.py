@@ -633,92 +633,19 @@ def main():
 
     components.html(html_code, height=500)
 
-    # Ganti bagian button Royal Celebration dengan ini:
-    st.markdown("""
-    <div id="royalCelebration" style="
-        background: linear-gradient(135deg, #d23669 0%, #ff69b4 100%);
-        color: white;
-        border: none;
-        padding: 16px 45px;
-        font-size: 1.1rem;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 500;
-        border-radius: 50px;
-        cursor: pointer;
-        box-shadow: 0 10px 25px rgba(210, 54, 105, 0.3);
-        transition: all 0.3s ease;
-        display: block;
-        margin: 50px auto;
-        position: relative;
-        overflow: hidden;
-        letter-spacing: 1px;
-        text-align: center;
-        max-width: 300px;
-    ">
-        👑 Click for Royal Celebration!
-    </div>
-
-    <div id="celebrationMessage" style="
-        font-family: 'Playfair Display', serif;
-        color: #d23669;
-        font-size: 1.3rem;
-        text-align: center;
-        margin: 30px 0;
-        display: none;
-    ">
-        Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
-    </div>
-
-    <script>
-    document.getElementById('royalCelebration').addEventListener('click', function() {
-        // Trigger Streamlit balloons
-        window.parent.postMessage({
-            'isStreamlitMessage': true,
-            'type': 'streamlit:component_event',
-            'componentId': 'default',
-            'args': ['click']
-        }, '*');
-        
-        // Show message
-        document.getElementById('celebrationMessage').style.display = 'block';
-        
-        // Fire confetti
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js';
-        script.onload = function() {
-            confetti({
-                particleCount: 500,
-                spread: 120,
-                origin: { y: 0.6 },
-                colors: ['#ff69b4', '#ffb6c1', '#ffc0cb', '#ffffff', '#ffd700'],
-                shapes: ['circle', 'star'],
-                scalar: 1.5
-            });
-
-            setTimeout(() => {
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { x: 0.3, y: 0.7 },
-                    colors: ['#ffd700'],
-                    shapes: ['star'],
-                    scalar: 2
-                });
-
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { x: 0.7, y: 0.7 },
-                    colors: ['#ffd700'],
-                    shapes: ['star'],
-                    scalar: 2
-                });
-            }, 300);
-        };
-        document.head.appendChild(script);
-    });
-    </script>
-    """, unsafe_allow_html=True)
+    if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
+        fire_confetti()
+        st.markdown("""
+        <div style="
+            font-family: 'Playfair Display', serif;
+            color: #d23669;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 30px 0;
+        ">
+            Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
+        </div>
+        """, unsafe_allow_html=True)
     
     st.markdown(f"""
     <div class="footer">
