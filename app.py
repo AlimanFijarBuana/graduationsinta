@@ -314,13 +314,6 @@ st.markdown(f"""
     }}
 
     /* BUTTONS */
-    .stButton {{
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        margin: 50px 0;
-    }}
-
     .stButton>button {{
         background: linear-gradient(135deg, #d23669 0%, #ff69b4 100%);
         border: none;
@@ -333,6 +326,8 @@ st.markdown(f"""
         cursor: pointer;
         box-shadow: 0 10px 25px rgba(210, 54, 105, 0.3);
         transition: all 0.3s ease;
+        display: block;
+        margin: 50px auto;
         position: relative;
         overflow: hidden;
         letter-spacing: 1px;
@@ -436,7 +431,7 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    # GALERI FOTO
+   # GALERI FOTO
     st.markdown('<div class="gallery-title" style="text-align:center;">Memory Lane 🌸</div>', unsafe_allow_html=True)
 
     # Menggunakan st.columns dengan lebar yang sama untuk semua gambar
