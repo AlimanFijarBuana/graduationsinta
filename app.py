@@ -641,7 +641,7 @@ def main():
             color: #d23669;
             font-size: 1.3rem;
             text-align: center;
-            margin: 300px 0;
+            margin: 100%;
         ">
             Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
         </div>
