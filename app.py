@@ -641,7 +641,7 @@ def main():
             color: #d23669;
             font-size: 1.3rem;
             text-align: center;
-            margin: 100%;
+            margin: 300px 0;
         ">
             Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
         </div>
@@ -656,3 +656,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
