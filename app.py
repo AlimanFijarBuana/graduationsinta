@@ -636,7 +636,7 @@ def main():
     st.markdown("""
     <style>
     div.stButton > button:first-child {
-        width: 100%;   /* atur sesuai keinginan */
+        width: 1000;   /* atur sesuai keinginan */
         margin: 0 auto; /* center horizontal */
         display: block;
     }
