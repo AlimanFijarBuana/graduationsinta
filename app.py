@@ -633,29 +633,20 @@ def main():
 
     components.html(html_code, height=500)
 
-    col1, col2, col3 = st.columns([1,2,1])
-
-    with col2:
-        if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
-            fire_confetti()
-            st.markdown("""
-                <div style="
-                    display: flex;
-                    justify-content: center;
-                    text-align: center;
-                    margin: 30px 0;
-                ">
-                    <div style="
-                        font-family: 'Playfair Display', serif;
-                        color: #d23669;
-                        font-size: 1.3rem;
-                    ">
-                        Semoga setiap langkahmu selalu dipenuhi cahaya,<br>
-                        karena kamu pantas bersinar lebih dari siapapun! ✨
-                    </div>
-                </div>
-            """, unsafe_allow_html=True)
-
+    if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
+        fire_confetti()
+        st.markdown("""
+        <div style="
+            font-family: 'Playfair Display', serif;
+            color: #d23669;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 30px 0;
+        ">
+            Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
+        </div>
+        """, unsafe_allow_html=True)
+    
     st.markdown(f"""
     <div class="footer">
         Made with 💖 for Princess {data['name']}'s {data['graduation_year']} Graduation
