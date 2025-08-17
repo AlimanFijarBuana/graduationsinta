@@ -634,6 +634,11 @@ def main():
     components.html(html_code, height=500)
 
     # ==================== BUTTON ROYAL CELEBRATION ====================
+    # Initialize celebrate state
+    if "celebrate" not in st.session_state:
+        st.session_state.celebrate = False
+
+    # Tombol HTML
     celebrate_html = f"""
     <div style="
         display: flex;
@@ -663,8 +668,11 @@ def main():
     <script>
     const btn = document.getElementById('celebrateBtn');
     btn.onclick = () => {{
-        // Kirim pesan ke Streamlit untuk rerun
-        window.parent.postMessage({{isCelebrating: true}}, "*");
+        // Update URL query param
+        const url = new URL(window.location);
+        url.searchParams.set('celebrate', 'true');
+        window.history.pushState(null, '', url);
+        window.location.reload();
     }};
     </script>
     """
@@ -672,11 +680,9 @@ def main():
     components.html(celebrate_html, height=100)
 
     # Tangani celebration di Python
-    if "celebrate" not in st.session_state:
-        st.session_state.celebrate = False
+    if st.query_params.get("celebrate") == ["true"]:
+        st.session_state.celebrate = True
 
-    # Event listener untuk menerima pesan dari JS
-    st.experimental_get_query_params()  # Trigger rerun untuk mendeteksi state baru
     if st.session_state.celebrate:
         fire_confetti()
         st.markdown("""
@@ -690,6 +696,7 @@ def main():
             Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
         </div>
         """, unsafe_allow_html=True)
+
 
         
     st.markdown(f"""
