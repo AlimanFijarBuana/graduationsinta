@@ -633,26 +633,29 @@ def main():
 
     components.html(html_code, height=500)
 
-    if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
-        fire_confetti()
-        # Bungkus tombol dengan div biar bisa center
+    # Gunakan HTML + CSS untuk tombol biar center
     st.markdown(
         """
-        <div style="display: flex; justify-content: center;">
-            <button style="
-                background-color: #f5f5f5;
-                border: 2px solid #d23669;
-                color: #d23669;
-                font-size: 1.1rem;
-                padding: 10px 20px;
-                border-radius: 10px;
-                cursor: pointer;
-            ">👑 Click for Royal Celebration!</button>
+        <div style="text-align:center; margin-top:20px; margin-bottom:20px;">
+            <form action="#" method="get">
+                <button type="submit" style="
+                    background-color:#d4af37;
+                    color:white;
+                    font-size:18px;
+                    padding:12px 25px;
+                    border:none;
+                    border-radius:12px;
+                    cursor:pointer;
+                    font-family:'Playfair Display', serif;
+                ">
+                    👑 Click for Royal Celebration!
+                </button>
+            </form>
         </div>
         """,
         unsafe_allow_html=True
     )
-
+    
     st.markdown(f"""
     <div class="footer">
         Made with 💖 for Princess {data['name']}'s {data['graduation_year']} Graduation
