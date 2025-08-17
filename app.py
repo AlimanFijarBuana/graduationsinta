@@ -633,7 +633,51 @@ def main():
 
     components.html(html_code, height=500)
 
-    if st.button("👑 Click for Royal Celebration!", key="celebrate_btn"):
+    # ==================== BUTTON ROYAL CELEBRATION ====================
+    celebrate_html = f"""
+    <div style="
+        display: flex;
+        justify-content: center;
+        margin: 50px 0;
+    ">
+        <button id="celebrateBtn" style="
+            background: linear-gradient(135deg, #d23669 0%, #ff69b4 100%);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(210, 54, 105, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        ">
+            👑 Click for Royal Celebration!
+        </button>
+    </div>
+
+    <script>
+    const btn = document.getElementById('celebrateBtn');
+    btn.onclick = () => {{
+        // Kirim pesan ke Streamlit untuk rerun
+        window.parent.postMessage({{isCelebrating: true}}, "*");
+    }};
+    </script>
+    """
+
+    components.html(celebrate_html, height=100)
+
+    # Tangani celebration di Python
+    if "celebrate" not in st.session_state:
+        st.session_state.celebrate = False
+
+    # Event listener untuk menerima pesan dari JS
+    st.experimental_get_query_params()  # Trigger rerun untuk mendeteksi state baru
+    if st.session_state.celebrate:
         fire_confetti()
         st.markdown("""
         <div style="
@@ -646,7 +690,8 @@ def main():
             Semoga setiap langkahmu selalu dipenuhi cahaya, karena kamu pantas bersinar lebih dari siapapun! ✨
         </div>
         """, unsafe_allow_html=True)
-    
+
+        
     st.markdown(f"""
     <div class="footer">
         Made with 💖 for Princess {data['name']}'s {data['graduation_year']} Graduation
